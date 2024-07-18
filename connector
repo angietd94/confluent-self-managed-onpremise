@@ -1,0 +1,23 @@
+{
+"connector.class": "io.debezium.connector.mysql.MySqlConnector", "database.hostname": "XX",
+"database.port": "3306",
+"database.user": "cdc",
+"database.password": "XX",
+"database.server.id": "1",
+"topic.prefix": "testcdc",
+"database.include.list": "syndixisdemohead", "schema.history.internal.kafka.bootstrap.servers": "XX", "schema.history.internal.kafka.sasl.mechanism": "PLAIN", "schema.history.internal.kafka.topic": "testcdc", "schema.history.internal.kafka.security.protocol": "SASL_SSL",
+"schema.history.internal.kafka.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username='XX' password='XX';",
+"schema.history.internal.consumer.security.protocol": "SASL_SSL",
+"schema.history.internal.consumer.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username='XX' password='XX';",
+"schema.history.internal.consumer.sasl.mechanism": "PLAIN",
+"schema.history.internal.producer.security.protocol": "SASL_SSL",
+"schema.history.internal.producer.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username='XX' password='XX';",
+"schema.history.internal.producer.sasl.mechanism": "PLAIN", "include.schema.changes": "true",
+"snapshot.mode": "initial", "topic.creation.default.replication.factor": 3,
+"topic.creation.default.partitions": 4,
+"topic.creation.default.compression.type": "snappy",
+"transforms": "insertDBName,removeDBName,insertTenantId",
+"transforms.removeDBName.type": "org.apache.kafka.connect.transforms.RegexRouter", "transforms.removeDBName.regex": "testcdc.([^.]*).(.*)", "transforms.removeDBName.replacement": "$2",
+"transforms.insertDBName.type": "org.apache.kafka.connect.transforms.InsertField$Value", "transforms.insertDBName.topic.field": "DatabaseName",
+"transforms.insertTenantId.type": "org.apache.kafka.connect.transforms.InsertField$Value", "transforms.insertTenantId.static.field": "TenantId", "transforms.insertTenantId.static.value": "XX"
+}
